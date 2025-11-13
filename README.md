@@ -12,9 +12,7 @@ AI-powered invoice comparison system for Claude Desktop. Compare supplier invoic
 
 ## Quick Start
 
-### Installation
-
-#### Option 1: Using uvx (Recommended)
+### Installation (macOS)
 
 1. **Install uv** (if not already installed):
 ```bash
@@ -23,21 +21,20 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 2. **Configure Claude Desktop**:
 
-Edit your Claude Desktop config file:
-- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+Edit your Claude Desktop config file at:
+`~/Library/Application Support/Claude/claude_desktop_config.json`
 
 Add this configuration:
 
-**macOS:**
 ```json
 {
   "mcpServers": {
     "invoice-comparison": {
-      "command": "/Users/YOUR_USERNAME/.local/bin/uvx",
+      "command": "uv",
       "args": [
-        "--from",
-        "git+https://github.com/mhosaic-technologies/invoice-comparison-mcp",
+        "--directory",
+        "/Users/YOUR_USERNAME/invoice-comparison-mcp",
+        "run",
         "invoice-comparison-server"
       ]
     }
@@ -46,37 +43,17 @@ Add this configuration:
 ```
 *Replace `YOUR_USERNAME` with your actual macOS username*
 
-**Windows:**
-```json
-{
-  "mcpServers": {
-    "invoice-comparison": {
-      "command": "uvx",
-      "args": [
-        "--from",
-        "git+https://github.com/mhosaic-technologies/invoice-comparison-mcp",
-        "invoice-comparison-server"
-      ]
-    }
-  }
-}
-```
-
-3. **Restart Claude Desktop**
-
-That's it! The first time you use it, uvx will automatically:
-- Download and install the package
-- Set up a virtual environment
-- Initialize the database with sample products
-
-#### Option 2: Install from PyPI (When Published)
-
+3. **Clone and set up the repository**:
 ```bash
-# Install from PyPI (when package is published)
-pip install invoice-comparison-mcp
+cd ~
+git clone https://github.com/mhosaic-technologies/invoice-comparison-mcp.git
+cd invoice-comparison-mcp
+uv sync
 ```
 
-Then configure Claude Desktop with just `uvx invoice-comparison-mcp`.
+4. **Restart Claude Desktop**
+
+The first time you use it, the system will automatically initialize the database with sample products.
 
 ### First Use
 
@@ -96,7 +73,8 @@ cp full_supplier_mappings.db ~/.invoice-comparison/supplier_mappings.db
 
 Or import from Excel:
 ```bash
-uvx --from invoice-comparison-mcp invoice-comparison-import your_products.xlsx
+cd ~/invoice-comparison-mcp
+uv run invoice-comparison-import your_products.xlsx
 ```
 
 ## Usage
@@ -217,7 +195,8 @@ The package includes command-line utilities:
 ### Import Excel to Database
 
 ```bash
-uvx --from invoice-comparison-mcp invoice-comparison-import products.xlsx
+cd ~/invoice-comparison-mcp
+uv run invoice-comparison-import products.xlsx
 ```
 
 Supports flexible column detection:
@@ -231,7 +210,8 @@ Supports flexible column detection:
 Combine multiple databases (e.g., from different users):
 
 ```bash
-uvx --from invoice-comparison-mcp invoice-comparison-merge database1.db database2.db merged.db
+cd ~/invoice-comparison-mcp
+uv run invoice-comparison-merge database1.db database2.db merged.db
 ```
 
 ## File Locations
@@ -315,7 +295,8 @@ The database initializes automatically on first run. If you have issues:
 ls -la ~/.invoice-comparison/
 
 # Manually initialize
-uvx --from invoice-comparison-mcp invoice-comparison-server
+cd ~/invoice-comparison-mcp
+uv run invoice-comparison-server
 ```
 
 ### Import Errors
