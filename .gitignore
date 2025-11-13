@@ -1,0 +1,87 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database - full database not included in repo
+data/
+*.db
+
+# Keep demo database
+!src/invoice_comparison/data/demo_database.db
+
+# Output files
+output/
+*.xlsx
+*.csv
+
+# Logs
+*.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Development files
+*_OLD.*
+*.backup
+*.bak
+*.tmp
+.temp/
+
+# Documentation (keep only main README)
+CLAUDE_CUSTOM_INSTRUCTIONS.md
+CORRECTIONS_WORKFLOW.md
+DATABASE_MANAGEMENT.md
+DEPLOYMENT_GUIDE.md
+EXCEL_AUTO_GENERATION.md
+FINAL_SUMMARY.md
+GITHUB_DEPLOYMENT.md
+HOW_TO_USE.md
+MCP_SETUP.md
+PROGRESS.md
+QUICK_START.md
+README_CLIENT.md
+STATUS.md
+VERIFICATION_REPORT.md
+
+# Scripts (not needed in package)
+INSTALL.sh
+create_client_package.sh
+create_demo_db.py
+import_excel_to_db.py
+load_data.py
+merge_databases.py
+run_mcp_server.py
+
+# Test files
+test_*.py
+
+# Other
+*.pdf
+mcp_config.json
+requirements.txt
+README_OLD.md
